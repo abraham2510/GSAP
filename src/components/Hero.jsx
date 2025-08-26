@@ -13,7 +13,7 @@ export const Hero = () => {
     const sectionsRef = useRef([]);
 
     useGSAP(() => {
-        gsap.fromTo("#logo", { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 2, ease: "bounce.in", delay: 0.5 })
+        gsap.fromTo("#logo", { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 2, ease: 'power4.inOut', delay: 0.5 })
     }, [])
 
     useGSAP(() => {
@@ -39,7 +39,7 @@ export const Hero = () => {
                         trigger: section,
                         start: () => (i ? "top bottom" : "top top"),
                         end: "bottom top",
-                        scrub: 1,
+                        scrub: 2,
                         invalidateOnRefresh: true,
                     },
                 }
@@ -51,16 +51,15 @@ export const Hero = () => {
 
     return (
         <>
-            {/* First Hero Section */}
+            {/* First Hero Section 1*/}
             <section
-                className="relative h-screen flex items-center justify-center shadow-black"
-                style={{
-                    backgroundImage: `url(${cyber1})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.8)",
-                }}
+                ref={(el) => (sectionsRef.current[0] = el)}
+                className="relative h-screen flex items-center justify-center"
             >
+                <div
+                    className="bg absolute top-0 left-0 w-full h-full -z-10"
+                    style={{ backgroundImage: `url(${cyber1})`, backgroundSize: "cover", backgroundPosition: "center" }}
+                ></div>
                 <div className="mb-20">
                     <img
                         id="logo"
@@ -70,9 +69,9 @@ export const Hero = () => {
                 </div>
             </section>
 
-            {/* Section 1 */}
+            {/* Section 2 */}
             <section
-                ref={(el) => (sectionsRef.current[0] = el)}
+                ref={(el) => (sectionsRef.current[1] = el)}
                 className="relative h-screen flex items-center justify-center"
             >
                 <div
@@ -84,9 +83,9 @@ export const Hero = () => {
                 </h1>
             </section>
 
-            {/* Section 2 */}
+            {/* Section 3 */}
             <section
-                ref={(el) => (sectionsRef.current[1] = el)}
+                ref={(el) => (sectionsRef.current[2] = el)}
                 className="relative h-screen flex items-center justify-center"
             >
                 <div
@@ -98,9 +97,9 @@ export const Hero = () => {
                 </h1>
             </section>
 
-            {/* Section 3 */}
+            {/* Section 4 */}
             <section
-                ref={(el) => (sectionsRef.current[2] = el)}
+                ref={(el) => (sectionsRef.current[3] = el)}
                 className="relative h-screen flex items-center justify-center"
             >
                 <div
