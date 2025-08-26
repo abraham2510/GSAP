@@ -13,22 +13,8 @@ export const Hero = () => {
     const sectionsRef = useRef([]);
 
     useGSAP(() => {
-        gsap.fromTo("#logo", {
-            opacity: 0,
-            y: -50,
-        }, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: "#logo",
-                start: "top 80%",
-                toggleActions: "play none none reverse",
-                markers: false,
-            }
-        });
-    })
+        gsap.fromTo("#logo", { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 2, ease: "bounce.in", delay: 0.5 })
+    }, [])
 
     useGSAP(() => {
         let getRatio = (el) =>
@@ -36,13 +22,6 @@ export const Hero = () => {
 
         sectionsRef.current.forEach((section, i) => {
             let bg = section.querySelector(".bg");
-
-            // Use imported cyber images
-            const cyberImages = [cr1, cr2, cr3];
-            bg.style.backgroundImage = `url(${cyberImages[i]})`;
-            bg.style.backgroundSize = "cover";
-            bg.style.backgroundPosition = "center";
-            bg.style.backgroundRepeat = "no-repeat";
 
             gsap.fromTo(
                 bg,
@@ -62,42 +41,76 @@ export const Hero = () => {
                         end: "bottom top",
                         scrub: 1,
                         invalidateOnRefresh: true,
-                        markers: false,
                     },
                 }
             );
         });
     }, []);
 
+
+
     return (
         <>
+            {/* First Hero Section */}
             <section
                 className="relative h-screen flex items-center justify-center shadow-black"
                 style={{
                     backgroundImage: `url(${cyber1})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.8)'
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.8)",
                 }}
             >
-                {/* <h1 className="text-[10vw] font-semibold text-center z-10 text-white">
-                    Simple parallax sections
-                </h1> */}
                 <div className="mb-20">
-                    <img id="logo" src="https://ik.imagekit.io/c2zxrxqp6/CyberPunk/GameSection/cyberpunk.png?updatedAt=1746880811691" alt="logo" />
+                    <img
+                        id="logo"
+                        src="https://ik.imagekit.io/c2zxrxqp6/CyberPunk/GameSection/cyberpunk.png?updatedAt=1746880811691"
+                        alt="logo"
+                    />
                 </div>
             </section>
 
-            {["Hey look, a title", "So smooth", "Nice, right?"].map((text, i) => (
-                <section
-                    key={i}
-                    ref={(el) => (sectionsRef.current[i] = el)}
-                    className="relative h-screen flex items-center justify-center section"
-                >
-                    <div className="bg absolute top-0 left-0 w-full h-full -z-10"></div>
-                    <h1 className="text-[10vw] font-semibold text-center z-10 text-white">{text}</h1>
-                </section>
-            ))}
+            {/* Section 1 */}
+            <section
+                ref={(el) => (sectionsRef.current[0] = el)}
+                className="relative h-screen flex items-center justify-center"
+            >
+                <div
+                    className="bg absolute top-0 left-0 w-full h-full -z-10"
+                    style={{ backgroundImage: `url(${cr1})`, backgroundSize: "cover", backgroundPosition: "center" }}
+                ></div>
+                <h1 className="text-[10vw] font-semibold text-center z-10 text-white">
+                    Hey look, a title
+                </h1>
+            </section>
+
+            {/* Section 2 */}
+            <section
+                ref={(el) => (sectionsRef.current[1] = el)}
+                className="relative h-screen flex items-center justify-center"
+            >
+                <div
+                    className="bg absolute top-0 left-0 w-full h-full -z-10"
+                    style={{ backgroundImage: `url(${cr2})`, backgroundSize: "cover", backgroundPosition: "center" }}
+                ></div>
+                <h1 className="text-[10vw] font-semibold text-center z-10 text-white">
+                    So smooth
+                </h1>
+            </section>
+
+            {/* Section 3 */}
+            <section
+                ref={(el) => (sectionsRef.current[2] = el)}
+                className="relative h-screen flex items-center justify-center"
+            >
+                <div
+                    className="bg absolute top-0 left-0 w-full h-full -z-10"
+                    style={{ backgroundImage: `url(${cr3})`, backgroundSize: "cover", backgroundPosition: "center" }}
+                ></div>
+                <h1 className="text-[10vw] font-semibold text-center z-10 text-white">
+                    Nice, right?
+                </h1>
+            </section>
         </>
     );
 };
